@@ -1,3 +1,0 @@
-[submodule "support/node-oauth"]
-	path = support/node-oauth
-	url = https://github.com/ciaranj/node-oauth.git
