@@ -11,6 +11,6 @@
   },
   "engine": ["node >=0.4.0"],
   "dependencies": {
-    "oauth": ">=0.8.4"
+    "request": ">=1.9.8"
   }
 }
