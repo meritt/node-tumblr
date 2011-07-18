@@ -1,0 +1,16 @@
+{
+  "name": "tumblr",
+  "version": "0.0.1",
+  "description": "Wrapper for the Tumblr API",
+  "author": "Alexey Simonenko <alexey@simonenko.su>",
+  "homepage": "http://github.com/meritt/node-tumblr.git",
+  "main": "./lib/tumblr",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/meritt/node-tumblr.git"
+  },
+  "engine": ["node >=0.4.0"],
+  "dependencies": {
+    "oauth": ">=0.8.4"
+  }
+}
