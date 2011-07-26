@@ -60,12 +60,3 @@ Tumblr = exports.Tumblr = (host, key) ->
   @
 
 ).call(Tumblr.prototype)
-
-
-##
-# Example
-##
-tumblr = new Tumblr 'simonenko.tumblr.com', 'key'
-
-tumblr.link limit: 2, (response) ->
-  console.log response
