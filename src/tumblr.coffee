@@ -23,6 +23,15 @@ Tumblr = exports.Tumblr = (host, key) ->
 
     request url, fn
 
+  for type in ['text', 'quote', 'link', 'answer', 'video', 'audio', 'photo']
+    alias = (self, type) ->
+      self[type] = (options, fn) ->
+        options = {} if not options
+        options.type = type if not options.type
+        @posts options, fn
+
+    alias @, type
+
   urlFor = (action, self, options = null) ->
     url = [
       'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
@@ -58,5 +67,5 @@ Tumblr = exports.Tumblr = (host, key) ->
 ##
 tumblr = new Tumblr 'simonenko.tumblr.com', 'key'
 
-tumblr.posts limit: 2, (response) ->
+tumblr.link limit: 2, (response) ->
   console.log response
