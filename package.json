@@ -1,7 +1,8 @@
 {
   "name": "tumblr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Wrapper for the Tumblr API v2",
+  "keywords": ["blog", "tumblr", "api", "wrapper"],
   "author": "Alexey Simonenko <alexey@simonenko.su>",
   "homepage": "http://github.com/meritt/node-tumblr",
   "main": "./lib/tumblr",
@@ -9,7 +10,9 @@
     "type": "git",
     "url": "http://github.com/meritt/node-tumblr.git"
   },
-  "engine": ["node >=0.4.0"],
+  "engines": {
+    "node": ">= 0.4.0"
+  },
   "dependencies": {
     "request": ">=1.9.8"
   },
