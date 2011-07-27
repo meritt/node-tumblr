@@ -1,7 +1,7 @@
 {
   "name": "tumblr",
   "version": "0.0.1",
-  "description": "Wrapper for the Tumblr API",
+  "description": "Wrapper for the Tumblr API v2",
   "author": "Alexey Simonenko <alexey@simonenko.su>",
   "homepage": "http://github.com/meritt/node-tumblr",
   "main": "./lib/tumblr",
