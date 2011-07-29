@@ -1,21 +1,33 @@
-##
-# Tumblr API
-##
+###
+  node-tumblr 0.0.2
+  (c) 2011 Alexey Simonenko, Serenity LLC.
+  For all details and documentation:
+  http://go.simonenko.su/node-tumblr
+###
 
 xhr = require 'request'
 qs  = require 'querystring'
 
+# Tumblr
+# ------
+
+# Constructor
 Tumblr = exports.Tumblr = (host, key) ->
   @host = host
   @key  = key
 
 (->
 
+  # Retrieve blog info.
+  # This method returns general information about the blog,
+  # such as the title, number of posts, and other high-level data.
   @info = (fn) ->
     url = urlFor 'info', @
 
     request url, fn
 
+  # Retrieve published posts.
+  # Posts are returned as an array attached to the posts field.
   @posts = (options, fn) ->
     [fn, options] = [options, null] if typeof options is 'function'
 
@@ -23,14 +35,17 @@ Tumblr = exports.Tumblr = (host, key) ->
 
     request url, fn
 
+  # Create alias for each type of posts and forward this call to @posts method
   alias = (self, type) ->
     self[type] = (options, fn) ->
       options = {} if not options
       options.type = type if not options.type
       @posts options, fn
 
+  # Alias text, quote, link, answer, video, audio and photo posts
   alias @, type for type in ['text', 'quote', 'link', 'answer', 'video', 'audio', 'photo']
 
+  # Prepare url for API call
   urlFor = (action, self, options = null) ->
     params = [
       'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
@@ -46,6 +61,7 @@ Tumblr = exports.Tumblr = (host, key) ->
 
     params.join ''
 
+  # Request API and call callback function with response
   request = (url, fn = ->) ->
     xhr {url}, (error, request, body) ->
       body = JSON.parse body
