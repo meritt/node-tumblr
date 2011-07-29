@@ -32,7 +32,7 @@ Tumblr = exports.Tumblr = (host, key) ->
   alias @, type for type in ['text', 'quote', 'link', 'answer', 'video', 'audio', 'photo']
 
   urlFor = (action, self, options = null) ->
-    url = [
+    params = [
       'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
       self.host + '/' + action                 # blog host and action
       '/' + options.type if options?.type?     # optional type of post to return
@@ -41,10 +41,10 @@ Tumblr = exports.Tumblr = (host, key) ->
 
     delete options.type if options?.type?
 
-    params = qs.stringify options
-    url.push '&' + params if params isnt ''    # optional params
+    query = qs.stringify options
+    params.push '&' + query if query isnt ''   # optional params
 
-    url.join ''
+    params.join ''
 
   request = (url, fn = ->) ->
     xhr uri: url, (error, request, body) ->
