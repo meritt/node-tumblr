@@ -1,5 +1,5 @@
 ###
-  node-tumblr 0.0.2
+  node-tumblr 0.0.3
   (c) 2011 Alexey Simonenko, Serenity LLC.
   For all details and documentation:
   http://go.simonenko.su/node-tumblr
