@@ -47,7 +47,7 @@ Tumblr = exports.Tumblr = (host, key) ->
     params.join ''
 
   request = (url, fn = ->) ->
-    xhr uri: url, (error, request, body) ->
+    xhr {url}, (error, request, body) ->
       body = JSON.parse body
       throw new Error body.meta.msg if body.meta.status isnt 200
       fn.call body, body.response
