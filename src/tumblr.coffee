@@ -23,14 +23,13 @@ Tumblr = exports.Tumblr = (host, key) ->
 
     request url, fn
 
-  for type in ['text', 'quote', 'link', 'answer', 'video', 'audio', 'photo']
-    alias = (self, type) ->
-      self[type] = (options, fn) ->
-        options = {} if not options
-        options.type = type if not options.type
-        @posts options, fn
+  alias = (self, type) ->
+    self[type] = (options, fn) ->
+      options = {} if not options
+      options.type = type if not options.type
+      @posts options, fn
 
-    alias @, type
+  alias @, type for type in ['text', 'quote', 'link', 'answer', 'video', 'audio', 'photo']
 
   urlFor = (action, self, options = null) ->
     url = [
