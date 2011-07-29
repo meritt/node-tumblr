@@ -56,6 +56,4 @@ Tumblr = exports.Tumblr = (host, key) ->
       throw new Error body.meta.msg if body.meta.status isnt 200
       fn.call body, body.response
 
-  @
-
 ).call(Tumblr.prototype)
