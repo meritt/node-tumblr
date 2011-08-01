@@ -11,7 +11,10 @@ How to use in JavaScript
 
 	var blog = new Tumblr('blog.tumblr.com', 'OAuth Consumer Key');
 
-	blog.text({limit: 2}, function(response) {
+	blog.text({limit: 2}, function(error, response) {
+		if (error) {
+		  throw new Error(error);
+		}
 		console.log(response.posts);
 	});
 
@@ -22,7 +25,8 @@ Or with CoffeeScript
 
 	blog = new Tumblr 'blog.tumblr.com', 'OAuth Consumer Key'
 
-	blog.text limit: 2, (response) ->
+	blog.text limit: 2, (error, response) ->
+		throw new Error error if error
 		console.log response.posts
 
 Install with NPM
@@ -42,6 +46,8 @@ API
 * video ([*options*, ]*callback*)
 * audio ([*options*, ]*callback*)
 * photo ([*options*, ]*callback*)
+
+[Options list](http://www.tumblr.com/docs/en/api/v2#posts)
 
 Author
 ------
