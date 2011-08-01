@@ -65,7 +65,7 @@ Tumblr = exports.Tumblr = (host, key) ->
   request = (url, fn = ->) ->
     xhr {url}, (error, request, body) ->
       body = JSON.parse body
-      throw new Error body.meta.msg if body.meta.status isnt 200
-      fn.call body, body.response
+      err  = body.meta.msg if body.meta.status isnt 200
+      fn.call body, err, body.response
 
 ).call(Tumblr.prototype)
