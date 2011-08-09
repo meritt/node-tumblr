@@ -4,7 +4,7 @@
   "description": "Wrapper for the Tumblr API v2",
   "keywords": ["blog", "tumblr", "api", "wrapper"],
   "author": "Alexey Simonenko <alexey@simonenko.su>",
-  "homepage": "http://go.simonenko.su/node-tumblr",
+  "homepage": "http://nko.io/paGOx1",
   "main": "./lib/tumblr",
   "repository": {
     "type": "git",
