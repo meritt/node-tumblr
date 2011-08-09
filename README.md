@@ -2,7 +2,7 @@
 
 A Node.JS wrapper for [Tumblr's API v2](http://www.tumblr.com/docs/en/api/v2).
 
-[The announcement in Russian of this module in my blog.](http://go.simonenko.su/node-tumblr)
+[The announcement in Russian of this module in my blog.](http://nko.io/paGOx1)
 
 How to use in JavaScript
 ------------------------
