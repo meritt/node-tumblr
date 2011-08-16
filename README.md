@@ -4,30 +4,34 @@ A Node.JS wrapper for [Tumblr's API v2](http://www.tumblr.com/docs/en/api/v2).
 
 [The announcement in Russian of this module in my blog.](http://nko.io/paGOx1)
 
-How to use in JavaScript
-------------------------
+How to use with JavaScript
+--------------------------
 
-	var Tumblr = require('tumblr').Tumblr;
+```javascript
+var Tumblr = require('tumblr').Tumblr;
 
-	var blog = new Tumblr('blog.tumblr.com', 'OAuth Consumer Key');
+var blog = new Tumblr('blog.tumblr.com', 'OAuth Consumer Key');
 
-	blog.text({limit: 2}, function(error, response) {
-		if (error) {
-		  throw new Error(error);
-		}
-		console.log(response.posts);
-	});
+blog.text({limit: 2}, function(error, response) {
+	if (error) {
+	  throw new Error(error);
+	}
+	console.log(response.posts);
+});
+```
 
 Or with CoffeeScript
 --------------------
 
-	Tumblr = require('tumblr').Tumblr
+```coffeescript
+Tumblr = require('tumblr').Tumblr
 
-	blog = new Tumblr 'blog.tumblr.com', 'OAuth Consumer Key'
+blog = new Tumblr 'blog.tumblr.com', 'OAuth Consumer Key'
 
-	blog.text limit: 2, (error, response) ->
-		throw new Error error if error
-		console.log response.posts
+blog.text limit: 2, (error, response) ->
+	throw new Error error if error
+	console.log response.posts
+```
 
 Install with NPM
 ----------------
