@@ -64,8 +64,12 @@ Tumblr = exports.Tumblr = (host, key) ->
   # Request API and call callback function with response
   request = (url, fn = ->) ->
     xhr {url}, (error, request, body) ->
-      body = JSON.parse body
-      err  = body.meta.msg if body.meta.status isnt 200
+      try
+        body = JSON.parse body
+        err  = body.meta.msg if body.meta.status isnt 200
+      catch error
+        err = "Invalid Response: #{error}";
+
       fn.call body, err, body.response
 
 ).call(Tumblr.prototype)
