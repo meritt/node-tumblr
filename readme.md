@@ -1,8 +1,8 @@
 # Tumblr
 
-A Node.JS wrapper for [Tumblr's API v2](http://www.tumblr.com/docs/en/api/v2).
+A Node.JS wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 
-[The announcement in Russian of this module in my blog.](http://nko.io/paGOx1)
+[The announcement in Russian of this module in my blog.](http://simonenko.su/8169320732/node-tumblr-my-first-nodejs-module)
 
 How to use with JavaScript
 --------------------------
@@ -14,8 +14,9 @@ var blog = new Tumblr('blog.tumblr.com', 'OAuth Consumer Key');
 
 blog.text({limit: 2}, function(error, response) {
 	if (error) {
-	  throw new Error(error);
+		throw new Error(error);
 	}
+	
 	console.log(response.posts);
 });
 ```
@@ -24,7 +25,7 @@ Or with CoffeeScript
 --------------------
 
 ```coffeescript
-Tumblr = require('tumblr').Tumblr
+{Tumblr} = require 'tumblr'
 
 blog = new Tumblr 'blog.tumblr.com', 'OAuth Consumer Key'
 
@@ -32,6 +33,8 @@ blog.text limit: 2, (error, response) ->
 	throw new Error error if error
 	console.log response.posts
 ```
+
+----------------
 
 Install with NPM
 ----------------
@@ -56,4 +59,4 @@ API
 Author
 ------
 
-* Alexey Simonenko, dwarfman@gmail.com
+* [Alexey Simonenko](mailto:alexey@simonenko.su), [simonenko.su](http://simonenko.su)
