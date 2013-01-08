@@ -1,8 +1,6 @@
 ###
-  node-tumblr 0.0.3
-  (c) 2011 Alexey Simonenko, Serenity LLC.
-  For all details and documentation:
-  http://nko.io/paGOx1
+  node-tumblr 0.1.0
+  (c) 2011-2013 Alexey Simonenko, Serenity LLC.
 ###
 
 xhr = require 'request'
