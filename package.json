@@ -1,22 +1,22 @@
 {
-  "name": "tumblr",
-  "version": "0.0.4",
-  "description": "Wrapper for the Tumblr API v2",
-  "keywords": ["blog", "tumblr", "api", "wrapper"],
-  "author": "Alexey Simonenko <alexey@simonenko.su>",
-  "homepage": "http://nko.io/paGOx1",
-  "main": "./lib/tumblr",
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/meritt/node-tumblr.git"
-  },
-  "engines": {
-    "node": ">= 0.4.0"
-  },
-  "dependencies": {
-    "request": ">=1.9.8"
-  },
-  "devDependencies": {
-    "coffee-script": ">= 1.0.0"
+    "name": "tumblr"
+  , "version": "0.0.4"
+  , "description": "A Node.JS wrapper for the Tumblr API v2"
+  , "keywords": ["blog", "tumblr", "api", "wrapper"]
+  , "author": "Alexey Simonenko <alexey@simonenko.su>"
+  , "homepage": "http://simonenko.su/projects/node-tumblr"
+  , "main": "./lib/tumblr"
+  , "repository": {
+        "type": "git"
+      , "url": "https://github.com/meritt/node-tumblr.git"
+    }
+  , "engines": {
+      "node": ">=0.6.0 <0.9.0"
+    }
+  , "dependencies": {
+      "request": "2.12.x"
+    }
+  , "devDependencies": {
+      "coffee-script": "1.4.x"
   }
 }
