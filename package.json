@@ -1,6 +1,6 @@
 {
     "name": "tumblr"
-  , "version": "0.1.0"
+  , "version": "0.1.1"
   , "description": "A Node.JS wrapper for the Tumblr API v2"
   , "keywords": ["blog", "tumblr", "api", "wrapper"]
   , "author": "Alexey Simonenko <alexey@simonenko.su>"
@@ -11,12 +11,12 @@
       , "url": "https://github.com/meritt/node-tumblr.git"
     }
   , "engines": {
-      "node": ">=0.6.0 <0.9.0"
+      "node": ">=0.6 <0.11"
     }
   , "dependencies": {
-      "request": "2.12.x"
+      "request": "2.16"
     }
   , "devDependencies": {
-      "coffee-script": "1.4.x"
+      "coffee-script": "1.6"
   }
 }
