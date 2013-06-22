@@ -29,24 +29,27 @@ module.exports = User = (consumer_key, consumer_secret, token, token_secret) ->
   # Retrieve the user's dashboard.
   # This method returns retrieve the dashboard that matches
   # the OAuth credentials submitted with the request.
-  @dashboard = (fn) ->
-    url = RequestUtils.userUrl 'dashboard', @
+  @dashboard = (options, fn) ->
+    [fn, options] = [options, null] if typeof options is 'function'
+    url = RequestUtils.userUrl 'dashboard', @, options
 
     RequestUtils.oauthGet url, @, fn
 
   # Retrieve the user's likes.
   # This method returns retrieve the liked posts that matches
   # the OAuth credentials submitted with the request.
-  @likes = (fn) ->
-    url = RequestUtils.userUrl 'likes', @
+  @likes = (options, fn) ->
+    [fn, options] = [options, null] if typeof options is 'function'
+    url = RequestUtils.userUrl 'likes', @, options
 
     RequestUtils.oauthGet url, @, fn
 
   # Retrieve the user's following blogs.
   # This method returns retrieve the following blogs that matches
   # the OAuth credentials submitted with the request.
-  @following = (fn) ->
-    url = RequestUtils.userUrl 'following', @
+  @following = (options, fn) ->
+    [fn, options] = [options, null] if typeof options is 'function'
+    url = RequestUtils.userUrl 'following', @, options
 
     RequestUtils.oauthGet url, @, fn
 
