@@ -10,12 +10,12 @@ RequestUtils = require './requestutils'
 # ------
 
 # Constructor
-module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
+module.exports = Blog = (host, consumer_key, consumer_secret, token, token_secret) ->
   @host = host
-  @consumerKey  = consumerKey
-  @consumerSecret = consumerSecret
+  @consumer_key  = consumerKey
+  @consumer_secret = consumerSecret
   @token = token
-  @tokenSecret = tokenSecret
+  @token_secret = tokenSecret
 
 (->
 
@@ -25,7 +25,7 @@ module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) 
   @info = (fn) ->
     url = RequestUtils.blogUrl 'info', @
 
-    RequestUtils.apikeyGet url, fn
+    RequestUtils.get url, fn
 
   # Retrieve blog avatar.
   # Get the blog's avatar in 9 different sizes.
@@ -34,7 +34,7 @@ module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) 
     [fn, size] = [size, null] if typeof size is 'function'
     url = RequestUtils.blogUrl 'avatar', @, {type:size}
 
-    RequestUtils.apikeyGet url, fn
+    RequestUtils.get url, fn
 
   # Retrieve blog's likes.
   # Return the publicly exposed likes from the blog.
@@ -42,7 +42,7 @@ module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) 
     [fn, options] = [options, null] if typeof options is 'function'
     url = RequestUtils.blogUrl 'likes', @, options
 
-    RequestUtils.apikeyGet url, fn
+    RequestUtils.get url, fn
 
   # Retrieve published posts.
   # Posts are returned as an array attached to the posts field.
@@ -51,7 +51,7 @@ module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) 
 
     url = RequestUtils.blogUrl 'posts', @, options
 
-    RequestUtils.apikeyGet url, fn
+    RequestUtils.get url, fn
 
   # Create alias for each type of posts and forward this call to @posts method
   alias = (self, type) ->

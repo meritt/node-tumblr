@@ -24,11 +24,34 @@ qs  = require 'querystring'
 
     params.join ''
 
-  @apikeyGet = (url, fn = ->) ->
-    request.get {url, followRedirect: false, json: true}, (err, response, body) ->
+  @userUrl = (action, self, options = {}) ->
+    params = [
+      'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
+      action                                   # action
+      '?'
+    ]
+
+    query = qs.stringify options
+    params.push query                          # optional params
+
+    params.join ''
+
+  # Send requests with API_KEY
+  @req = (url, method = 'GET', fn, oauth) ->
+    options = {url, method, followRedirect: false, json: true}
+    options.push oauth if oauth?
+    request options, (err, response, body) ->
       if not err
         err = body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
 
-      fn.call body, err, body.response
+      if fn?
+        fn.call body, err, body.response
+
+  @get = (url, fn) -> @req url, 'GET', fn
+  @post = (url, fn) -> @req url, 'POST', fn
+
+  # Send requests with OAuth
+  @oauthGet = (url, oauth, fn) -> @oauthReq url, 'GET', fn, oauth
+  @oauthPost = (url, oauth, fn) -> @oauthReq url, 'POST', fn, oauth
 
 ).call RequestUtils
