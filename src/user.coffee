@@ -34,4 +34,20 @@ module.exports = User = (consumer_key, consumer_secret, token, token_secret) ->
 
     RequestUtils.oauthGet url, @, fn
 
+  # Retrieve the user's likes.
+  # This method returns retrieve the liked posts that matches
+  # the OAuth credentials submitted with the request.
+  @likes = (fn) ->
+    url = RequestUtils.userUrl 'likes', @
+
+    RequestUtils.oauthGet url, @, fn
+
+  # Retrieve the user's following blogs.
+  # This method returns retrieve the following blogs that matches
+  # the OAuth credentials submitted with the request.
+  @following = (fn) ->
+    url = RequestUtils.userUrl 'following', @
+
+    RequestUtils.oauthGet url, @, fn
+
 ).call(User.prototype)

@@ -24,5 +24,21 @@ module.exports = {
       test.ok(response.posts);
       test.done();
     });
+  },
+  testLikes: function(test) {
+    this.user.likes(function(err, response) {
+      test.ifError(err);
+      test.ok(response);
+      test.ok(response.liked_posts);
+      test.done();
+    });
+  },
+  testFollowing: function(test) {
+    this.user.following(function(err, response) {
+      test.ifError(err);
+      test.ok(response);
+      test.ok(response.blogs);
+      test.done();
+    });
   }
 };
