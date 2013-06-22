@@ -12,10 +12,10 @@ RequestUtils = require './requestutils'
 # Constructor
 module.exports = Blog = (host, consumer_key, consumer_secret, token, token_secret) ->
   @host = host
-  @consumer_key  = consumerKey
-  @consumer_secret = consumerSecret
+  @consumer_key  = consumer_key
+  @consumer_secret = consumer_secret
   @token = token
-  @token_secret = tokenSecret
+  @token_secret = token_secret
 
 (->
 

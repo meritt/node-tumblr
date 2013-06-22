@@ -17,7 +17,7 @@ qs  = require 'querystring'
     ]
 
     delete options.type if options.type?
-    options.api_key = self.consumerKey
+    options.api_key = self.consumer_key
 
     query = qs.stringify options
     params.push query                          # optional params
