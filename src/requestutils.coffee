@@ -39,7 +39,7 @@ qs  = require 'querystring'
   # Send requests with API_KEY
   @req = (url, method = 'GET', fn, oauth) ->
     options = {url, method, followRedirect: false, json: true}
-    options.push oauth if oauth?
+    options.oauth = oauth if oauth?
     request options, (err, response, body) ->
       if not err
         err = body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
