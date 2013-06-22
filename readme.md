@@ -13,15 +13,14 @@ Forked from Alexey Simonenko. Refactor and enhanced by Greg Wang.
 
 ## Install with NPM
 
-	npm install tumblr
+	npm install https://github.com/gregwym/node-tumblr/archive/master.tar.gz
 
 
 ## How to use with JavaScript
 
-```javascript
-var Tumblr = require('tumblr').Tumblr;
-
-var blog = new Tumblr('blog.tumblr.com', 'OAuth Consumer Key');
+```
+var Blog = require('tumblr').Blog;
+var blog = new Blog('blog.tumblr.com', 'OAuth Consumer Key');
 
 blog.text({limit: 2}, function(error, response) {
 	if (error) {
@@ -30,18 +29,35 @@ blog.text({limit: 2}, function(error, response) {
 
 	console.log(response.posts);
 });
+
+var User = require('tumblr').User;
+var user = new User('Consumer Key', 'Consumer Secret', 'Token', 'Token Secret');
+
+user.info(function(error, response) {
+	if (error) {
+		throw new Error(error);
+	}
+	
+	console.log(response.user);
+});
 ```
 
 ## Or with CoffeeScript
 
-```coffeescript
-{Tumblr} = require 'tumblr'
-
-blog = new Tumblr 'blog.tumblr.com', 'OAuth Consumer Key'
+```
+{Blog} = require 'tumblr'
+blog = new Blog 'blog.tumblr.com', 'OAuth Consumer Key'
 
 blog.text limit: 2, (error, response) ->
 	throw new Error error if error
 	console.log response.posts
+
+{User} = require 'tumblr'
+user = new User 'Consumer Key', 'Consumer Secret', 'Token', 'Token Secret'
+
+user.info (error, response) ->
+	throw new Error error if error
+	console.log response.user
 ```
 
 # API
@@ -61,3 +77,12 @@ blog.text limit: 2, (error, response) ->
 * photo ([*options*, ]*callback*)
 
 Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.com/docs/en/api/v2#blog_methods)
+
+## User::
+
+* info (*callback*)
+* dashboard ([*options*, ]*callback*)
+* likes ([*options*, ]*callback*)
+* following ([*options*, ]*callback*)
+
+Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.com/docs/en/api/v2#user-methods)
