@@ -82,10 +82,10 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
 
   # Request API and call callback function with response
   request = (url, fn = ->) ->
-    xhr {url, followRedirect: false}, (error, request, body) ->
+    xhr {url, followRedirect: false}, (error, response, body) ->
       try
         body = JSON.parse body
-        err  = body.meta.msg if body.meta.status isnt 200 and body.meta.status isnt 301
+        err  = body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
       catch error
         err = "Invalid Response: #{error}";
 
