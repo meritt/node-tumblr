@@ -26,7 +26,7 @@ qs  = require 'querystring'
 
   @userUrl = (action, self, options = {}) ->
     params = [
-      'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
+      'http://api.tumblr.com/v2/user/'         # Tumblr API URL
       action                                   # action
       '?'
     ]
@@ -42,7 +42,7 @@ qs  = require 'querystring'
     options.oauth = oauth if oauth?
     request options, (err, response, body) ->
       if not err
-        err = body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
+        err = response.statusCode + ' ' + body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
 
       if fn?
         fn.call body, err, body.response
