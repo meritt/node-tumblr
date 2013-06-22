@@ -18,11 +18,19 @@ module.exports = User = (consumer_key, consumer_secret, token, token_secret) ->
 
 (->
 
-  # Retrieve blog info.
-  # This method returns general information about the blog,
-  # such as the title, number of posts, and other high-level data.
+  # Retrieve the user info.
+  # This method returns general information about the user,
+  # such as the name, number of folloing, and other.
   @info = (fn) ->
     url = RequestUtils.userUrl 'info', @
+
+    RequestUtils.oauthGet url, @, fn
+
+  # Retrieve the user's dashboard.
+  # This method returns retrieve the dashboard that matches
+  # the OAuth credentials submitted with the request.
+  @dashboard = (fn) ->
+    url = RequestUtils.userUrl 'dashboard', @
 
     RequestUtils.oauthGet url, @, fn
 

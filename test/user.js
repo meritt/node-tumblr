@@ -6,6 +6,7 @@ module.exports = {
                          'consumer_secret',
                          'token',
                          'token_secret');
+
     callback();
   },
   testInfo: function(test) {
@@ -13,6 +14,14 @@ module.exports = {
       test.ifError(err);
       test.ok(response);
       test.ok(response.user);
+      test.done();
+    });
+  },
+  testDashboard: function(test) {
+    this.user.dashboard(function(err, response) {
+      test.ifError(err);
+      test.ok(response);
+      test.ok(response.posts);
       test.done();
     });
   }
