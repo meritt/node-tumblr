@@ -3,7 +3,7 @@
   (c) 2011-2013 Alexey Simonenko, Serenity LLC.
 ###
 
-xhr = require 'request'
+request = require 'request'
 qs  = require 'querystring'
 
 # Blog
@@ -25,7 +25,7 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
   @info = (fn) ->
     url = urlFor 'info', @
 
-    request url, fn
+    retrieve url, fn
 
   # Retrieve blog avatar.
   # Get the blog's avatar in 9 different sizes.
@@ -34,7 +34,7 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
     [fn, size] = [size, null] if typeof size is 'function'
     url = urlFor 'avatar', @, {type:size}
 
-    request url, fn
+    retrieve url, fn
 
   # Retrieve blog's likes.
   # Return the publicly exposed likes from the blog.
@@ -42,7 +42,7 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
     [fn, options] = [options, null] if typeof options is 'function'
     url = urlFor 'likes', @, options
 
-    request url, fn
+    retrieve url, fn
 
   # Retrieve published posts.
   # Posts are returned as an array attached to the posts field.
@@ -51,7 +51,7 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
 
     url = urlFor 'posts', @, options
 
-    request url, fn
+    retrieve url, fn
 
   # Create alias for each type of posts and forward this call to @posts method
   alias = (self, type) ->
@@ -68,7 +68,7 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
     params = [
       'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
       self.host + '/' + action                 # blog host and action
-      '/' + options.type if options.type?     # optional type of post to return
+      '/' + options.type if options.type?      # optional type of post to return
       '?'
     ]
 
@@ -76,18 +76,15 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
     options.api_key = self.consumerKey
 
     query = qs.stringify options
-    params.push query if query isnt ''   # optional params
+    params.push query                          # optional params
 
     params.join ''
 
   # Request API and call callback function with response
-  request = (url, fn = ->) ->
-    xhr {url, followRedirect: false}, (error, response, body) ->
-      try
-        body = JSON.parse body
-        err  = body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
-      catch error
-        err = "Invalid Response: #{error}";
+  retrieve = (url, fn = ->) ->
+    request {url, followRedirect: false, json: true}, (err, response, body) ->
+      if not err
+        err = body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
 
       fn.call body, err, body.response
 
