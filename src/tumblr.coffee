@@ -30,7 +30,8 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
   # Retrieve blog avatar.
   # Get the blog's avatar in 9 different sizes.
   # The default size is 64x64.
-  @avatar = (fn, size) ->
+  @avatar = (size, fn) ->
+    [fn, size] = [size, null] if typeof size is 'function'
     url = urlFor 'avatar', @, {type:size}
 
     request url, fn
@@ -38,6 +39,7 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
   # Retrieve blog's likes.
   # Return the publicly exposed likes from the blog.
   @likes = (options, fn) ->
+    [fn, options] = [options, null] if typeof options is 'function'
     url = urlFor 'likes', @, options
 
     request url, fn
@@ -62,19 +64,19 @@ Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
   alias @, type for type in ['text', 'quote', 'link', 'answer', 'video', 'audio', 'photo']
 
   # Prepare url for API call
-  urlFor = (action, self, options = null) ->
+  urlFor = (action, self, options = {}) ->
     params = [
       'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
       self.host + '/' + action                 # blog host and action
-      '/' + options.type if options?.type?     # optional type of post to return
+      '/' + options.type if options.type?     # optional type of post to return
       '?'
     ]
 
-    delete options.type if options?.type?
+    delete options.type if options.type?
     options.api_key = self.consumerKey
 
     query = qs.stringify options
-    params.push '&' + query if query isnt ''   # optional params
+    params.push query if query isnt ''   # optional params
 
     params.join ''
 
