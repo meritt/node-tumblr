@@ -10,7 +10,7 @@ qs  = require 'querystring'
 # ------
 
 # Constructor
-Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
+module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
   @host = host
   @consumerKey  = consumerKey
   @consumerSecret = consumerSecret

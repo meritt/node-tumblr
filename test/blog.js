@@ -1,4 +1,4 @@
-var Blog = require('../lib/tumblr').Blog;
+var Blog = require('../lib').Blog;
 
 module.exports = {
   setUp: function(callback) {

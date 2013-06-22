@@ -5,7 +5,7 @@
   , "keywords": ["blog", "tumblr", "api", "wrapper"]
   , "author": "Alexey Simonenko <alexey@simonenko.su>"
   , "homepage": "http://simonenko.su/projects/node-tumblr"
-  , "main": "./lib/tumblr"
+  , "main": "./lib/index"
   , "contributors": ["Greg Wang <gregwym@qq.com> (http://gregwym.info)"]
   , "repository": {
         "type": "git"
