@@ -16,7 +16,7 @@
       "npm": "1.2.x"
     }
   , "dependencies": {
-      "request": "2.14.x"
+      "request": "2.x"
     }
   , "devDependencies": {
       "coffee-script": "1.6.x"
