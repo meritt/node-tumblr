@@ -1,10 +1,10 @@
 ###
-  node-tumblr 0.1.1
+  node-tumblr 0.1.2
   (c) 2011-2013 Alexey Simonenko, Serenity LLC.
+  Refactored and modified by Greg Wang
 ###
 
-request = require 'request'
-qs  = require 'querystring'
+RequestUtils = require './requestutils'
 
 # Blog
 # ------
@@ -23,35 +23,35 @@ module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) 
   # This method returns general information about the blog,
   # such as the title, number of posts, and other high-level data.
   @info = (fn) ->
-    url = urlFor 'info', @
+    url = RequestUtils.blogUrl 'info', @
 
-    retrieve url, fn
+    RequestUtils.apikeyGet url, fn
 
   # Retrieve blog avatar.
   # Get the blog's avatar in 9 different sizes.
   # The default size is 64x64.
   @avatar = (size, fn) ->
     [fn, size] = [size, null] if typeof size is 'function'
-    url = urlFor 'avatar', @, {type:size}
+    url = RequestUtils.blogUrl 'avatar', @, {type:size}
 
-    retrieve url, fn
+    RequestUtils.apikeyGet url, fn
 
   # Retrieve blog's likes.
   # Return the publicly exposed likes from the blog.
   @likes = (options, fn) ->
     [fn, options] = [options, null] if typeof options is 'function'
-    url = urlFor 'likes', @, options
+    url = RequestUtils.blogUrl 'likes', @, options
 
-    retrieve url, fn
+    RequestUtils.apikeyGet url, fn
 
   # Retrieve published posts.
   # Posts are returned as an array attached to the posts field.
   @posts = (options, fn) ->
     [fn, options] = [options, null] if typeof options is 'function'
 
-    url = urlFor 'posts', @, options
+    url = RequestUtils.blogUrl 'posts', @, options
 
-    retrieve url, fn
+    RequestUtils.apikeyGet url, fn
 
   # Create alias for each type of posts and forward this call to @posts method
   alias = (self, type) ->
@@ -62,30 +62,5 @@ module.exports = Blog = (host, consumerKey, consumerSecret, token, tokenSecret) 
 
   # Alias text, quote, link, answer, video, audio and photo posts
   alias @, type for type in ['text', 'quote', 'link', 'answer', 'video', 'audio', 'photo']
-
-  # Prepare url for API call
-  urlFor = (action, self, options = {}) ->
-    params = [
-      'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
-      self.host + '/' + action                 # blog host and action
-      '/' + options.type if options.type?      # optional type of post to return
-      '?'
-    ]
-
-    delete options.type if options.type?
-    options.api_key = self.consumerKey
-
-    query = qs.stringify options
-    params.push query                          # optional params
-
-    params.join ''
-
-  # Request API and call callback function with response
-  retrieve = (url, fn = ->) ->
-    request {url, followRedirect: false, json: true}, (err, response, body) ->
-      if not err
-        err = body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
-
-      fn.call body, err, body.response
 
 ).call(Blog.prototype)
