@@ -6,13 +6,16 @@
 xhr = require 'request'
 qs  = require 'querystring'
 
-# Tumblr
+# Blog
 # ------
 
 # Constructor
-Tumblr = exports.Tumblr = (host, key) ->
+Blog = exports.Blog = (host, consumerKey, consumerSecret, token, tokenSecret) ->
   @host = host
-  @key  = key
+  @consumerKey  = consumerKey
+  @consumerSecret = consumerSecret
+  @token = token
+  @tokenSecret = tokenSecret
 
 (->
 
@@ -21,6 +24,21 @@ Tumblr = exports.Tumblr = (host, key) ->
   # such as the title, number of posts, and other high-level data.
   @info = (fn) ->
     url = urlFor 'info', @
+
+    request url, fn
+
+  # Retrieve blog avatar.
+  # Get the blog's avatar in 9 different sizes.
+  # The default size is 64x64.
+  @avatar = (fn, size) ->
+    url = urlFor 'avatar', @, {type:size}
+
+    request url, fn
+
+  # Retrieve blog's likes.
+  # Return the publicly exposed likes from the blog.
+  @likes = (options, fn) ->
+    url = urlFor 'likes', @, options
 
     request url, fn
 
@@ -49,10 +67,11 @@ Tumblr = exports.Tumblr = (host, key) ->
       'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
       self.host + '/' + action                 # blog host and action
       '/' + options.type if options?.type?     # optional type of post to return
-      '?api_key=' + self.key                   # API key
+      '?'
     ]
 
     delete options.type if options?.type?
+    options.api_key = self.consumerKey
 
     query = qs.stringify options
     params.push '&' + query if query isnt ''   # optional params
@@ -61,13 +80,13 @@ Tumblr = exports.Tumblr = (host, key) ->
 
   # Request API and call callback function with response
   request = (url, fn = ->) ->
-    xhr {url}, (error, request, body) ->
+    xhr {url, followRedirect: false}, (error, request, body) ->
       try
         body = JSON.parse body
-        err  = body.meta.msg if body.meta.status isnt 200
+        err  = body.meta.msg if body.meta.status isnt 200 and body.meta.status isnt 301
       catch error
         err = "Invalid Response: #{error}";
 
       fn.call body, err, body.response
 
-).call(Tumblr.prototype)
+).call(Blog.prototype)
