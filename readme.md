@@ -15,10 +15,18 @@ Forked from Alexey Simonenko. Refactor and enhanced by Greg Wang.
 
 	npm install https://github.com/gregwym/node-tumblr/archive/master.tar.gz
 
+## Run the Unit Test
+
+Fill in the authentication information in `test/user.js`, then run
+
+	nodeunit test
+
+Obviously you must have `nodeunit` installed.
+
 
 ## How to use with JavaScript
 
-```
+```javascript
 var Blog = require('tumblr').Blog;
 var blog = new Blog('blog.tumblr.com', 'OAuth Consumer Key');
 
@@ -44,7 +52,7 @@ user.info(function(error, response) {
 
 ## Or with CoffeeScript
 
-```
+```coffeescript
 {Blog} = require 'tumblr'
 blog = new Blog 'blog.tumblr.com', 'OAuth Consumer Key'
 
