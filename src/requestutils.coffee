@@ -51,7 +51,7 @@ qs  = require 'querystring'
   @post = (url, fn) -> @req url, 'POST', fn
 
   # Send requests with OAuth
-  @oauthGet = (url, oauth, fn) -> @oauthReq url, 'GET', fn, oauth
-  @oauthPost = (url, oauth, fn) -> @oauthReq url, 'POST', fn, oauth
+  @oauthGet = (url, oauth, fn) -> @req url, 'GET', fn, oauth
+  @oauthPost = (url, oauth, fn) -> @req url, 'POST', fn, oauth
 
 ).call RequestUtils
