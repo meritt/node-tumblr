@@ -2,7 +2,7 @@ var Blog = require('../lib').Blog;
 
 module.exports = {
   setUp: function(callback) {
-    this.blog = new Blog('musiclover261.tumblr.com', '0S8LLINIwPsMy8dFgsAyUInDAxUrKn52YXy0ez4930hwfhO3LF');
+    this.blog = new Blog('musiclover261.tumblr.com', {consumer_key: '0S8LLINIwPsMy8dFgsAyUInDAxUrKn52YXy0ez4930hwfhO3LF'});
     callback();
   },
   testInfo: function(test) {

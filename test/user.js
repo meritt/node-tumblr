@@ -1,11 +1,15 @@
 var User = require('../lib').User;
 
+var oauth = {
+  consumer_key: 'OAuth Consumer Key',
+  consumer_secret: 'OAuth Consumer Secret',
+  token: 'OAuth Access Token',
+  token_secret: 'OAuth Access Token Secret'
+};
+
 module.exports = {
   setUp: function(callback) {
-    this.user = new User('consumer_key',
-                         'consumer_secret',
-                         'token',
-                         'token_secret');
+    this.user = new User(oauth);
 
     callback();
   },
