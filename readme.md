@@ -6,7 +6,7 @@ A Node.JS wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 
 ## Install with NPM
 
-	npm install node-tumblr
+	npm install tumblr
 
 ## Run the Unit Test
 
