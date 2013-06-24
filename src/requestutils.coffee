@@ -1,9 +1,9 @@
-module.exports = RequestUtils = {}
+qs      = require 'querystring'
 request = require 'request'
-qs  = require 'querystring'
 
-(->
-  @blogUrl = (action, self, options = {}) ->
+module.exports =
+  # Prepare URL for blog requests
+  blogUrl: (action, self, options = {}) ->
     params = [
       'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
       self.host + '/' + action                 # blog host and action
@@ -12,41 +12,36 @@ qs  = require 'querystring'
     ]
 
     delete options.type if options.type?
-    options.api_key = self.consumer_key
+
+    options.api_key = self.oauth.consumer_key  # OAuth Consumer Key
 
     query = qs.stringify options
     params.push query                          # optional params
 
     params.join ''
 
-  @userUrl = (action, self, options = {}) ->
-    params = [
-      'http://api.tumblr.com/v2/user/'         # Tumblr API URL
-      action                                   # action
-      '?'
-    ]
-
+  # Prepare URL for user requests
+  userUrl: (action, options = {}) ->
     query = qs.stringify options
-    params.push query                          # optional params
+    params = "http://api.tumblr.com/v2/user/#{action}?#{query}"
+    params
 
-    params.join ''
+  # Send GET and POST requests
+  get: (url, fn) -> req url, 'GET', fn
+  post: (url, fn) -> req url, 'POST', fn
 
-  # Send requests with API_KEY
-  @req = (url, method = 'GET', fn, oauth) ->
-    options = {url, method, followRedirect: false, json: true}
-    options.oauth = oauth if oauth?
-    request options, (err, response, body) ->
-      if not err
-        err = response.statusCode + ' ' + body.meta.msg if response.statusCode isnt 200 and response.statusCode isnt 301
+  # Send GET and POST requests with OAuth
+  oauthGet: (url, oauth, fn) -> req url, 'GET', fn, oauth
+  oauthPost: (url, oauth, fn) -> req url, 'POST', fn, oauth
 
-      if fn?
-        fn.call body, err, body.response
+# Send requests
+req = (url, method = 'GET', fn, oauth) ->
+  options = {url, method, followRedirect: false, json: true}
+  options.oauth = oauth if oauth?
 
-  @get = (url, fn) -> @req url, 'GET', fn
-  @post = (url, fn) -> @req url, 'POST', fn
+  request options, (error, response, body) ->
+    if not error and response.statusCode not in [200, 301]
+      error = "#{response.statusCode} #{body.meta.msg}"
 
-  # Send requests with OAuth
-  @oauthGet = (url, oauth, fn) -> @req url, 'GET', fn, oauth
-  @oauthPost = (url, oauth, fn) -> @req url, 'POST', fn, oauth
-
-).call RequestUtils
+    if fn?
+      fn.call body, error, body.response
