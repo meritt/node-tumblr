@@ -1,8 +1,3 @@
-###
-  node-tumblr 0.2.0
-  (c) 2013 Greg Wang
-###
-
 RequestUtils = require './requestutils'
 qs = require 'querystring'
 

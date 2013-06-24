@@ -1,8 +1,3 @@
-###
-  node-tumblr 0.2.0
-  (c) 2013 Greg Wang
-###
-
 module.exports = RequestUtils = {}
 request = require 'request'
 qs  = require 'querystring'

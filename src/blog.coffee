@@ -1,9 +1,3 @@
-###
-  node-tumblr 0.1.2
-  (c) 2011-2013 Alexey Simonenko, Serenity LLC.
-  Refactored and modified by Greg Wang
-###
-
 RequestUtils = require './requestutils'
 
 # Blog
