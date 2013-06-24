@@ -20,6 +20,6 @@
     }
   , "devDependencies": {
       "coffee-script": "1.6.x",
-      "nodeunit": "0.7.x"
+      "nodeunit": "0.8.x"
   }
 }
