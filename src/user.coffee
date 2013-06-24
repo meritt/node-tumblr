@@ -1,4 +1,4 @@
-request = require './requestutils'
+request = require './request'
 
 # User
 # ------
