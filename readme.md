@@ -2,49 +2,79 @@
 
 A Node.JS wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 
-[The announcement in Russian of this module in my blog.](http://simonenko.su/8169320732/node-tumblr-my-first-nodejs-module)
+Forked from Alexey Simonenko. Refactor and enhanced by Greg Wang.
 
-How to use with JavaScript
---------------------------
+## Contributors
+
+* [Alexey Simonenko](mailto:alexey@simonenko.su), [simonenko.su](http://simonenko.su)
+* [Greg Wang](https://github.com/gregwym), <http://gregwym.info>
+
+# Usage
+
+## Install with NPM
+
+	npm install https://github.com/gregwym/node-tumblr/archive/master.tar.gz
+
+## Run the Unit Test
+
+Fill in the authentication information in `test/user.js`, then run
+
+	nodeunit test
+
+Obviously you must have `nodeunit` installed.
+
+
+## How to use with JavaScript
 
 ```javascript
-var Tumblr = require('tumblr').Tumblr;
-
-var blog = new Tumblr('blog.tumblr.com', 'OAuth Consumer Key');
+var Blog = require('tumblr').Blog;
+var blog = new Blog('blog.tumblr.com', 'OAuth Consumer Key');
 
 blog.text({limit: 2}, function(error, response) {
 	if (error) {
 		throw new Error(error);
 	}
-	
+
 	console.log(response.posts);
+});
+
+var User = require('tumblr').User;
+var user = new User('Consumer Key', 'Consumer Secret', 'Token', 'Token Secret');
+
+user.info(function(error, response) {
+	if (error) {
+		throw new Error(error);
+	}
+	
+	console.log(response.user);
 });
 ```
 
-Or with CoffeeScript
---------------------
+## Or with CoffeeScript
 
 ```coffeescript
-{Tumblr} = require 'tumblr'
-
-blog = new Tumblr 'blog.tumblr.com', 'OAuth Consumer Key'
+{Blog} = require 'tumblr'
+blog = new Blog 'blog.tumblr.com', 'OAuth Consumer Key'
 
 blog.text limit: 2, (error, response) ->
 	throw new Error error if error
 	console.log response.posts
+
+{User} = require 'tumblr'
+user = new User 'Consumer Key', 'Consumer Secret', 'Token', 'Token Secret'
+
+user.info (error, response) ->
+	throw new Error error if error
+	console.log response.user
 ```
 
-----------------
+# API
 
-Install with NPM
-----------------
-
-	npm install tumblr
-
-API
----
+## Blog::
 
 * info (*callback*)
+* avatar ([*size*, ]*callback*)
+* likes ([*options*, ]*callback*)
 * posts ([*options*, ]*callback*)
 * text ([*options*, ]*callback*)
 * quote ([*options*, ]*callback*)
@@ -54,9 +84,13 @@ API
 * audio ([*options*, ]*callback*)
 * photo ([*options*, ]*callback*)
 
-[Options list](http://www.tumblr.com/docs/en/api/v2#posts)
+Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.com/docs/en/api/v2#blog_methods)
 
-Author
-------
+## User::
 
-* [Alexey Simonenko](mailto:alexey@simonenko.su), [simonenko.su](http://simonenko.su)
+* info (*callback*)
+* dashboard ([*options*, ]*callback*)
+* likes ([*options*, ]*callback*)
+* following ([*options*, ]*callback*)
+
+Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.com/docs/en/api/v2#user-methods)
