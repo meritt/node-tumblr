@@ -22,7 +22,7 @@ module.exports = User = (@oauth) ->
       [fn, options] = [options, null] if typeof options is 'function'
       url = request.userUrl action, options
 
-      request.oauthGet url, self.oauth, fn
+      request.oauthGet url, @oauth, fn
 
   # Alias for dashboard, likes, following requests
   # This methods returns retrieve the following blogs that matches
