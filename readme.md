@@ -104,3 +104,9 @@ Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.co
 
 * [Alexey Simonenko](mailto:alexey@simonenko.su), [simonenko.su](http://simonenko.su)
 * [Greg Wang](https://github.com/gregwym), <http://gregwym.info>
+
+---
+
+## License
+
+The MIT License, see the included `license.md` file.
