@@ -12,8 +12,7 @@
       , "url": "https://github.com/meritt/node-tumblr.git"
     }
   , "engines": {
-      "node": "0.10.x",
-      "npm": "1.2.x"
+      "node": "0.10.x"
     }
   , "dependencies": {
       "request": "2.x"
