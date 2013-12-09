@@ -1,22 +1,26 @@
-# Tumblr
+# tumblr
+
+[![NPM version](https://badge.fury.io/js/tumblr.png)](http://badge.fury.io/js/tumblr) [![Dependency Status](https://david-dm.org/meritt/node-tumblr.png)](https://david-dm.org/meritt/node-tumblr)
 
 A Node.JS wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 
-# Usage
+## Installation
 
-## Install with NPM
+```
+$ npm install tumblr
+```
 
-	npm install tumblr
-
-## Run the Unit Test
+## Run the unit test
 
 Fill in the authentication information in `test/user.js`, then run
 
-	nodeunit test
+```
+$ nodeunit test
+```
 
 Obviously you must have `nodeunit` installed.
 
-## How to use with JavaScript
+## Examples
 
 ```javascript
 var oauth = {
@@ -73,9 +77,9 @@ user.info (error, response) ->
 	console.log response.user
 ```
 
-# API
+## API
 
-## Blog
+#### Blog
 
 * info (callback)
 * avatar ([size, ]callback)
@@ -91,7 +95,7 @@ user.info (error, response) ->
 
 Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.com/docs/en/api/v2#blog_methods)
 
-## User
+#### User
 
 * info (callback)
 * dashboard ([options, ]callback)
@@ -100,12 +104,12 @@ Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.co
 
 Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.com/docs/en/api/v2#user-methods)
 
+---
+
 ## Contributors
 
 * [Alexey Simonenko](mailto:alexey@simonenko.su), [simonenko.su](http://simonenko.su)
 * [Greg Wang](https://github.com/gregwym), <http://gregwym.info>
-
----
 
 ## License
 
