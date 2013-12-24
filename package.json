@@ -1,8 +1,8 @@
 {
     "name": "tumblr"
-  , "version": "0.2.1"
-  , "description": "A Node.JS wrapper for the Tumblr API v2"
-  , "keywords": ["blog", "tumblr", "api", "wrapper"]
+  , "version": "0.2.2"
+  , "description": "A node.js wrapper for the Tumblr API"
+  , "keywords": ["tumblr", "blog", "api", "wrapper"]
   , "author": "Alexey Simonenko <alexey@simonenko.su>"
   , "contributors": [
         "Alexey Simonenko <alexey@simonenko.su>"
