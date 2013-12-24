@@ -17,7 +17,7 @@
     <div class="wrapper">
       <header>
         <h1 class="header">node-tumblr</h1>
-        <p class="header">A Node.JS wrapper for the Tumblr API v2</p>
+        <p class="header">A node.js wrapper for the Tumblr API</p>
 
         <ul>
           <li class="download"><a class="buttons" href="https://github.com/meritt/node-tumblr/zipball/master">Download ZIP</a></li>
@@ -30,92 +30,78 @@
 
       </header>
       <section>
-        <h1>
-<a name="tumblr" class="anchor" href="#tumblr"><span class="octicon octicon-link"></span></a>Tumblr</h1>
+        <p><a href="http://badge.fury.io/js/tumblr"><img src="https://badge.fury.io/js/tumblr.png" alt="NPM version"></a> <a href="https://travis-ci.org/meritt/node-tumblr"><img src="https://travis-ci.org/meritt/node-tumblr.png?branch=master" alt="Build Status"></a> <a href="https://david-dm.org/meritt/node-tumblr"><img src="https://david-dm.org/meritt/node-tumblr.png" alt="Dependency Status"></a> <a href="https://david-dm.org/meritt/node-tumblr#info=devDependencies"><img src="https://david-dm.org/meritt/node-tumblr/dev-status.png" alt="devDependency Status"></a></p>
 
-<p>A Node.JS wrapper for the <a href="http://www.tumblr.com/docs/en/api/v2">Tumblr API v2</a>.</p>
-
-<h1>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+<p>A node.js wrapper for the <a href="http://www.tumblr.com/docs/en/api/v2">Tumblr API v2</a>.</p>
 
 <h2>
-<a name="install-with-npm" class="anchor" href="#install-with-npm"><span class="octicon octicon-link"></span></a>Install with NPM</h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<pre><code>npm install node-tumblr
+<pre><code>$ npm install tumblr
 </code></pre>
 
 <h2>
-<a name="run-the-unit-test" class="anchor" href="#run-the-unit-test"><span class="octicon octicon-link"></span></a>Run the Unit Test</h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
 
-<p>Fill in the authentication information in <code>test/user.js</code>, then run</p>
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">tumblr</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tumblr'</span><span class="p">);</span>
 
-<pre><code>nodeunit test
-</code></pre>
-
-<p>Obviously you must have <code>nodeunit</code> installed.</p>
-
-<h2>
-<a name="how-to-use-with-javascript" class="anchor" href="#how-to-use-with-javascript"><span class="octicon octicon-link"></span></a>How to use with JavaScript</h2>
-
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">oauth</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">consumer_key</span><span class="o">:</span> <span class="s1">'OAuth Consumer Key'</span><span class="p">,</span>
-    <span class="nx">consumer_secret</span><span class="o">:</span> <span class="s1">'OAuth Consumer Secret'</span><span class="p">,</span>
-    <span class="nx">token</span><span class="o">:</span> <span class="s1">'OAuth Access Token'</span><span class="p">,</span>
-    <span class="nx">token_secret</span><span class="o">:</span> <span class="s1">'OAuth Access Token Secret'</span>
+<span class="kd">var</span> <span class="nx">oauth</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">consumer_key</span><span class="o">:</span> <span class="s1">'OAuth Consumer Key'</span><span class="p">,</span>
+  <span class="nx">consumer_secret</span><span class="o">:</span> <span class="s1">'OAuth Consumer Secret'</span><span class="p">,</span>
+  <span class="nx">token</span><span class="o">:</span> <span class="s1">'OAuth Access Token'</span><span class="p">,</span>
+  <span class="nx">token_secret</span><span class="o">:</span> <span class="s1">'OAuth Access Token Secret'</span>
 <span class="p">};</span>
 
-<span class="kd">var</span> <span class="nx">Blog</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tumblr'</span><span class="p">).</span><span class="nx">Blog</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blog</span><span class="p">(</span><span class="s1">'blog.tumblr.com'</span><span class="p">,</span> <span class="nx">oauth</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">tumblr</span><span class="p">.</span><span class="nx">Blog</span><span class="p">(</span><span class="s1">'blog.tumblr.com'</span><span class="p">,</span> <span class="nx">oauth</span><span class="p">);</span>
 
 <span class="nx">blog</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span><span class="nx">limit</span><span class="o">:</span> <span class="mi">2</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-    <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">posts</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">posts</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="kd">var</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'tumblr'</span><span class="p">).</span><span class="nx">User</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">oauth</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">tumblr</span><span class="p">.</span><span class="nx">User</span><span class="p">(</span><span class="nx">oauth</span><span class="p">);</span>
 
 <span class="nx">user</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-    <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 
 <h2>
 <a name="or-with-coffeescript" class="anchor" href="#or-with-coffeescript"><span class="octicon octicon-link"></span></a>Or with CoffeeScript</h2>
 
-<div class="highlight"><pre><span class="p">{</span><span class="nx">Blog</span><span class="p">,</span> <span class="nx">User</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'tumblr'</span>
+<div class="highlight highlight-coffeescript"><pre><span class="p">{</span><span class="nx">Blog</span><span class="p">,</span> <span class="nx">User</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">'tumblr'</span>
 
 <span class="nv">oauth =</span>
-    <span class="nv">consumer_key: </span><span class="s">'OAuth Consumer Key'</span>
-    <span class="nv">consumer_secret: </span><span class="s">'OAuth Consumer Secret'</span>
-    <span class="nv">token: </span><span class="s">'OAuth Access Token'</span>
-    <span class="nv">token_secret: </span><span class="s">'OAuth Access Token Secret'</span>
+  <span class="nv">consumer_key: </span><span class="s">'OAuth Consumer Key'</span>
+  <span class="nv">consumer_secret: </span><span class="s">'OAuth Consumer Secret'</span>
+  <span class="nv">token: </span><span class="s">'OAuth Access Token'</span>
+  <span class="nv">token_secret: </span><span class="s">'OAuth Access Token Secret'</span>
 
 <span class="nv">blog = </span><span class="k">new</span> <span class="nx">Blog</span> <span class="s">'blog.tumblr.com'</span><span class="p">,</span> <span class="nx">oauth</span>
 
 <span class="nx">blog</span><span class="p">.</span><span class="nx">text</span> <span class="nv">limit: </span><span class="mi">2</span><span class="p">,</span> <span class="nf">(error, response) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">error</span> <span class="k">if</span> <span class="nx">error</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">response</span><span class="p">.</span><span class="nx">posts</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">error</span> <span class="k">if</span> <span class="nx">error</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">response</span><span class="p">.</span><span class="nx">posts</span>
 
 <span class="nv">user = </span><span class="k">new</span> <span class="nx">User</span> <span class="nx">oauth</span>
 
 <span class="nx">user</span><span class="p">.</span><span class="nx">info</span> <span class="nf">(error, response) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">error</span> <span class="k">if</span> <span class="nx">error</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">response</span><span class="p">.</span><span class="nx">user</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">error</span> <span class="k">if</span> <span class="nx">error</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">response</span><span class="p">.</span><span class="nx">user</span>
 </pre></div>
 
-<h1>
-<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h1>
-
 <h2>
-<a name="blog" class="anchor" href="#blog"><span class="octicon octicon-link"></span></a>Blog</h2>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
+
+<h4>
+<a name="blog" class="anchor" href="#blog"><span class="octicon octicon-link"></span></a>Blog</h4>
 
 <ul>
 <li>info (callback)</li>
@@ -131,8 +117,8 @@
 <li>photo ([options, ]callback)</li>
 </ul><p>Options list please refer to <a href="http://www.tumblr.com/docs/en/api/v2#blog_methods">Tumblr API v2 - Blog Methods</a></p>
 
-<h2>
-<a name="user" class="anchor" href="#user"><span class="octicon octicon-link"></span></a>User</h2>
+<h4>
+<a name="user" class="anchor" href="#user"><span class="octicon octicon-link"></span></a>User</h4>
 
 <ul>
 <li>info (callback)</li>
@@ -149,12 +135,17 @@
 <a href="mailto:alexey@simonenko.su">Alexey Simonenko</a>, <a href="http://simonenko.su">simonenko.su</a>
 </li>
 <li>
-<a href="https://github.com/gregwym">Greg Wang</a>, <a href="http://gregwym.info">http://gregwym.info</a>
+<a href="https://github.com/gregwym">Greg Wang</a>, <a href="http://gregwym.info">gregwym.info</a>
 </li>
-</ul>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License, see the included <code>license.md</code> file.</p>
+
+<p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/meritt/node-tumblr/trend.png" alt="Bitdeli Badge"></a></p>
       </section>
       <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
