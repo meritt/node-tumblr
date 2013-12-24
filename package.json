@@ -4,7 +4,10 @@
   , "description": "A Node.JS wrapper for the Tumblr API v2"
   , "keywords": ["blog", "tumblr", "api", "wrapper"]
   , "author": "Alexey Simonenko <alexey@simonenko.su>"
-  , "contributors": ["Greg Wang <gregwym@qq.com> (http://gregwym.info)"]
+  , "contributors": [
+        "Alexey Simonenko <alexey@simonenko.su>"
+      , "Greg Wang <gregwym@qq.com>"
+    ]
   , "homepage": "http://simonenko.su/projects/node-tumblr"
   , "main": "./lib/index"
   , "repository": {
@@ -18,7 +21,11 @@
       "request": "2.x"
     }
   , "devDependencies": {
-      "coffee-script": "1.6.x",
-      "nodeunit": "0.8.x"
-  }
+        "coffee-script": "1.6.x"
+      , "nodeunit": "0.8.x"
+    }
+  , "scripts": {
+      "test": "nodeunit test"
+    }
+  , "license": "MIT"
 }
