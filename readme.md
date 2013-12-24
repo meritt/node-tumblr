@@ -1,8 +1,8 @@
 # tumblr
 
-[![NPM version](https://badge.fury.io/js/tumblr.png)](http://badge.fury.io/js/tumblr) [![Dependency Status](https://david-dm.org/meritt/node-tumblr.png)](https://david-dm.org/meritt/node-tumblr)
+[![NPM version](https://badge.fury.io/js/tumblr.png)](http://badge.fury.io/js/tumblr) [![Build Status](https://travis-ci.org/meritt/node-tumblr.png?branch=master)](https://travis-ci.org/meritt/node-tumblr) [![Dependency Status](https://david-dm.org/meritt/node-tumblr.png)](https://david-dm.org/meritt/node-tumblr) [![devDependency Status](https://david-dm.org/meritt/node-tumblr/dev-status.png)](https://david-dm.org/meritt/node-tumblr#info=devDependencies)
 
-A Node.JS wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
+A node.js wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 
 ## Installation
 
@@ -10,46 +10,36 @@ A Node.JS wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 $ npm install tumblr
 ```
 
-## Run the unit test
-
-Fill in the authentication information in `test/user.js`, then run
-
-```
-$ nodeunit test
-```
-
-Obviously you must have `nodeunit` installed.
-
 ## Examples
 
-```javascript
+```js
+var tumblr = require('tumblr');
+
 var oauth = {
-	consumer_key: 'OAuth Consumer Key',
-	consumer_secret: 'OAuth Consumer Secret',
-	token: 'OAuth Access Token',
-	token_secret: 'OAuth Access Token Secret'
+  consumer_key: 'OAuth Consumer Key',
+  consumer_secret: 'OAuth Consumer Secret',
+  token: 'OAuth Access Token',
+  token_secret: 'OAuth Access Token Secret'
 };
 
-var Blog = require('tumblr').Blog;
-var blog = new Blog('blog.tumblr.com', oauth);
+var blog = new tumblr.Blog('blog.tumblr.com', oauth);
 
 blog.text({limit: 2}, function(error, response) {
-	if (error) {
-		throw new Error(error);
-	}
-	
-	console.log(response.posts);
+  if (error) {
+    throw new Error(error);
+  }
+
+  console.log(response.posts);
 });
 
-var User = require('tumblr').User;
-var user = new User(oauth);
+var user = new tumblr.User(oauth);
 
 user.info(function(error, response) {
-	if (error) {
-		throw new Error(error);
-	}
-	
-	console.log(response.user);
+  if (error) {
+    throw new Error(error);
+  }
+
+  console.log(response.user);
 });
 ```
 
@@ -59,22 +49,22 @@ user.info(function(error, response) {
 {Blog, User} = require 'tumblr'
 
 oauth =
-	consumer_key: 'OAuth Consumer Key'
-	consumer_secret: 'OAuth Consumer Secret'
-	token: 'OAuth Access Token'
-	token_secret: 'OAuth Access Token Secret'
+  consumer_key: 'OAuth Consumer Key'
+  consumer_secret: 'OAuth Consumer Secret'
+  token: 'OAuth Access Token'
+  token_secret: 'OAuth Access Token Secret'
 
 blog = new Blog 'blog.tumblr.com', oauth
 
 blog.text limit: 2, (error, response) ->
-	throw new Error error if error
-	console.log response.posts
+  throw new Error error if error
+  console.log response.posts
 
 user = new User oauth
 
 user.info (error, response) ->
-	throw new Error error if error
-	console.log response.user
+  throw new Error error if error
+  console.log response.user
 ```
 
 ## API
@@ -104,13 +94,13 @@ Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.co
 
 Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.com/docs/en/api/v2#user-methods)
 
----
-
 ## Contributors
 
 * [Alexey Simonenko](mailto:alexey@simonenko.su), [simonenko.su](http://simonenko.su)
-* [Greg Wang](https://github.com/gregwym), <http://gregwym.info>
+* [Greg Wang](https://github.com/gregwym), [gregwym.info](http://gregwym.info)
 
 ## License
 
 The MIT License, see the included `license.md` file.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/meritt/node-tumblr/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
