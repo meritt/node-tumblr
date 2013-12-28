@@ -6,7 +6,7 @@ A node.js wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 
 ## Installation
 
-```
+```bash
 $ npm install tumblr
 ```
 
@@ -93,6 +93,12 @@ Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.co
 * following ([options, ]callback)
 
 Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.com/docs/en/api/v2#user-methods)
+
+#### Tagged
+
+* search (tag[, options], callback)
+
+Options list please refer to [Tumblr API v2 - Tagged Methods](http://www.tumblr.com/docs/en/api/v2#tagged-method)
 
 ## Contributors
 
