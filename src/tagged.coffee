@@ -5,15 +5,20 @@ request = require './request'
 
 # Constructor
 module.exports = Tagged = (@oauth) ->
-  self = @
+
+(->
 
   # Retrieve tagged posts
   # Post are retrieved in a array
-  (options, fn)->
-    if typeof options == 'string'
-      options = 
-        tag: options 
- 
-    url = request.taggedUrl self, options
+  @search = (tag, options, fn) ->
+    if not tag
+      throw new Error 'The tag is required'
+
+    [fn, options] = [options, {}] if typeof options is 'function'
+
+    options.tag = tag
+    url = request.taggedUrl @, options
 
     request.get url, fn
+
+).call(Tagged.prototype)

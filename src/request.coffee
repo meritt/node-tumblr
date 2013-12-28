@@ -28,9 +28,7 @@ module.exports =
 
   # Prepare URL for tagged posts requests
   taggedUrl: (self, options = {}) ->
-    
     options.api_key = self.oauth.consumer_key
-
     "http://api.tumblr.com/v2/tagged?#{qs.stringify options}"
 
   # Send GET and POST requests

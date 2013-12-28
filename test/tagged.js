@@ -1,8 +1,12 @@
-var  Tagged = require('../lib').Tagged
-    ,oauth  = {};
+var Tagged = require('../lib').Tagged;
 
-if(process.env.NODE_CKEY) oauth.consumer_key    = process.env.NODE_CKEY; // FILL THIS
-if(process.env.NODE_CSEC) oauth.consumer_secret = process.env.NODE_CSEC; // FILL THIS
+var oauth = {
+  consumer_key: '' // FILL THIS
+};
+
+if (process.env.NODE_CKEY) {
+  oauth.consumer_key = process.env.NODE_CKEY;
+}
 
 module.exports = {
   setUp: function(next) {
@@ -10,20 +14,20 @@ module.exports = {
     next();
   },
 
-  testString: function(test) {
-    this.tags('Zdzisław Beksiński', function(e, r) {
-      test.ifError(e);
-      test.ok(r);
-      test.ok(r.length);
+  testSearch: function(test) {
+    this.tags.search('Zdzisław Beksiński', function(err, response) {
+      test.ifError(err);
+      test.ok(response);
+      test.ok(response.length);
       test.done();
     });
   },
 
-  testObject: function(test) {
-    this.tags({ "tag": "Zdzisław Beksiński", "limit": 5 }, function(e, r) {
-      test.ifError(e);
-      test.ok(r);
-      test.ok(r.length);
+  testOptions: function(test) {
+    this.tags.search("Zdzisław Beksiński", {"limit": 5}, function(err, response) {
+      test.ifError(err);
+      test.ok(response);
+      test.ok(response.length);
       test.done();
     });
   },
