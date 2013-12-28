@@ -1,7 +1,7 @@
 {
     "name": "tumblr"
   , "version": "0.2.2"
-  , "description": "A node.js wrapper for the Tumblr API"
+  , "description": "A wrapper for the Tumblr API"
   , "keywords": ["tumblr", "blog", "api", "wrapper"]
   , "author": "Alexey Simonenko <alexey@simonenko.su>"
   , "contributors": [
@@ -15,7 +15,7 @@
       , "url": "https://github.com/meritt/node-tumblr.git"
     }
   , "engines": {
-      "node": "0.10.x"
+      "node": "~0.10"
     }
   , "dependencies": {
       "request": "2.x"
