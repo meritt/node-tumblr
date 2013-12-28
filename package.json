@@ -1,6 +1,6 @@
 {
     "name": "tumblr"
-  , "version": "0.2.2"
+  , "version": "0.3.0"
   , "description": "A wrapper for the Tumblr API"
   , "keywords": ["tumblr", "blog", "api", "wrapper"]
   , "author": "Alexey Simonenko <alexey@simonenko.su>"
