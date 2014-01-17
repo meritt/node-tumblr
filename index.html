@@ -106,6 +106,7 @@
 <ul>
 <li>info (callback)</li>
 <li>avatar ([size, ]callback)</li>
+<li>followers ([options, ]callback)</li>
 <li>likes ([options, ]callback)</li>
 <li>posts ([options, ]callback)</li>
 <li>text ([options, ]callback)</li>
@@ -135,16 +136,21 @@
 </ul><p>Options list please refer to <a href="http://www.tumblr.com/docs/en/api/v2#tagged-method">Tumblr API v2 - Tagged Methods</a></p>
 
 <h2>
-<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
-<ul>
-<li>
-<a href="mailto:alexey@simonenko.su">Alexey Simonenko</a>, <a href="http://simonenko.su">simonenko.su</a>
-</li>
-<li>
-<a href="https://github.com/gregwym">Greg Wang</a>, <a href="http://gregwym.info">gregwym.info</a>
-</li>
-</ul><h2>
+<p><strong>DO NOT directly modify the <code>lib</code> files.</strong> These files are automatically built from CoffeeScript sources located under the <code>src</code> directory.</p>
+
+<p>To do build run:</p>
+
+<div class="highlight highlight-bash"><pre>cake build
+</pre></div>
+
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<p>Big thanks to all <a href="https://github.com/meritt/node-tumblr/graphs/contributors">contributors</a>.</p>
+
+<h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>The MIT License, see the included <code>license.md</code> file.</p>
