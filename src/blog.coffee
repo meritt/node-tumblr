@@ -27,6 +27,14 @@ module.exports = Blog = (@host, @oauth) ->
 
     request.get url, fn
 
+  # Retrieve blog's followers.
+  # Returns a list of User objects
+  @followers = (options, fn) ->
+    [fn, options] = [options, null] if typeof options is 'function'
+    url = request.blogUrl 'followers', @, options
+
+    request.get url, fn
+
   # Retrieve blog's likes.
   # Return the publicly exposed likes from the blog.
   @likes = (options, fn) ->

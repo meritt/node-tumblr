@@ -73,6 +73,7 @@ user.info (error, response) ->
 
 * info (callback)
 * avatar ([size, ]callback)
+* followers ([options, ]callback)
 * likes ([options, ]callback)
 * posts ([options, ]callback)
 * text ([options, ]callback)

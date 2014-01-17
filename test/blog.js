@@ -41,6 +41,19 @@ module.exports = {
     });
   },
 
+  testFollowers: function(test) {
+    this.blog.followers(function(err, response) {
+      test.ifError(err);
+      test.ok(response);
+      test.ok(response.total_users);
+      test.ok(response.users);
+      test.ok(response.users[0].name);
+      test.ok(response.users[0].url);
+      test.ok(response.users[0].updated);
+      test.done();
+    });
+  },
+
   testLikes: function(test) {
     this.blog.likes(function(err, response) {
       test.ifError(err);
