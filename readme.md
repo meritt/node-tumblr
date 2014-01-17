@@ -101,10 +101,19 @@ Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.co
 
 Options list please refer to [Tumblr API v2 - Tagged Methods](http://www.tumblr.com/docs/en/api/v2#tagged-method)
 
-## Contributors
+## Contributing
 
-* [Alexey Simonenko](mailto:alexey@simonenko.su), [simonenko.su](http://simonenko.su)
-* [Greg Wang](https://github.com/gregwym), [gregwym.info](http://gregwym.info)
+**DO NOT directly modify the `lib` files.** These files are automatically built from CoffeeScript sources located under the `src` directory.
+
+To do build run:
+
+```bash
+cake build
+```
+
+## Credits
+
+Big thanks to all [contributors](https://github.com/meritt/node-tumblr/graphs/contributors).
 
 ## License
 
