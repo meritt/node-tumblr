@@ -33,7 +33,7 @@ module.exports = Blog = (@host, @oauth) ->
     [fn, options] = [options, null] if typeof options is 'function'
     url = request.blogUrl 'followers', @, options
 
-    request.get url, fn
+    request.oauthGet url, @oauth, fn
 
   # Retrieve blog's likes.
   # Return the publicly exposed likes from the blog.
