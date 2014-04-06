@@ -15,13 +15,13 @@
       , "url": "https://github.com/meritt/node-tumblr.git"
     }
   , "engines": {
-      "node": "~0.10"
+      "node": ">=0.10"
     }
   , "dependencies": {
       "request": "2.x"
     }
   , "devDependencies": {
-        "coffee-script": "1.6.x"
+        "coffee-script": "~1.7.1"
       , "nodeunit": "0.8.x"
     }
   , "scripts": {
