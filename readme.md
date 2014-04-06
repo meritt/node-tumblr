@@ -1,6 +1,6 @@
 # tumblr
 
-[![NPM version](https://badge.fury.io/js/tumblr.png)](http://badge.fury.io/js/tumblr) [![Build Status](https://travis-ci.org/meritt/node-tumblr.png?branch=master)](https://travis-ci.org/meritt/node-tumblr) [![Dependency Status](https://david-dm.org/meritt/node-tumblr.png)](https://david-dm.org/meritt/node-tumblr) [![devDependency Status](https://david-dm.org/meritt/node-tumblr/dev-status.png)](https://david-dm.org/meritt/node-tumblr#info=devDependencies)
+[![NPM version](https://badge.fury.io/js/tumblr.svg)](http://badge.fury.io/js/tumblr) [![Build Status](https://travis-ci.org/meritt/node-tumblr.svg?branch=master)](https://travis-ci.org/meritt/node-tumblr) [![Dependency Status](https://david-dm.org/meritt/node-tumblr.svg?theme=shields.io)](https://david-dm.org/meritt/node-tumblr) [![devDependency Status](https://david-dm.org/meritt/node-tumblr/dev-status.svg?theme=shields.io)](https://david-dm.org/meritt/node-tumblr#info=devDependencies)
 
 A node.js wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
 
@@ -71,33 +71,33 @@ user.info (error, response) ->
 
 #### Blog
 
-* info (callback)
-* avatar ([size, ]callback)
-* followers ([options, ]callback)
-* likes ([options, ]callback)
-* posts ([options, ]callback)
-* text ([options, ]callback)
-* quote ([options, ]callback)
-* link ([options, ]callback)
-* answer ([options, ]callback)
-* video ([options, ]callback)
-* audio ([options, ]callback)
-* photo ([options, ]callback)
+* `info(callback)`
+* `avatar([size, ]callback)`
+* `followers([options, ]callback)`
+* `likes([options, ]callback)`
+* `posts([options, ]callback)`
+* `text([options, ]callback)`
+* `quote([options, ]callback)`
+* `link([options, ]callback)`
+* `answer([options, ]callback)`
+* `video([options, ]callback)`
+* `audio([options, ]callback)`
+* `photo([options, ]callback)`
 
 Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.com/docs/en/api/v2#blog_methods)
 
 #### User
 
-* info (callback)
-* dashboard ([options, ]callback)
-* likes ([options, ]callback)
-* following ([options, ]callback)
+* `info(callback)`
+* `dashboard([options, ]callback)`
+* `likes([options, ]callback)`
+* `following([options, ]callback)`
 
 Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.com/docs/en/api/v2#user-methods)
 
 #### Tagged
 
-* search (tag[, options], callback)
+* `search(tag[, options], callback)`
 
 Options list please refer to [Tumblr API v2 - Tagged Methods](http://www.tumblr.com/docs/en/api/v2#tagged-method)
 
