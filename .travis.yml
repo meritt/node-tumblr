@@ -1,12 +1,12 @@
 language: node_js
 
 node_js:
-  - '0.10'
-  - '0.11'
+  - "0.10"
+  - "0.11"
 
 env:
   global:
-  - secure: M8qwcS6j+mfhLjBf0oxc/Tf0vCs8vqRXOfCjgSp85SIaI7WWipBZIzJq9fbFwZQ46c0DPTt+63PlcHVFuY5Cxtm5y4EpGKIth5ssxGTHtCQ1HFdOfiQZOj5nFUZ4ur+qBK75D65dsNMWcqSyFnoxF71macRB9zHmYi/pgtOv10w=
-  - secure: Qpkc1wwxVxHGtMv4YvPER1wnE8wrXaEcS9xcucLzBE7BbaBT1E2EyW1bK583/KpLM4eWMQm7CQDXUasyxrWl9Q2Q3f+FQqayBf7Gu58Jief1pIk/Byl7UVRmHNTffOh38mNxbA/0l8POZ6VL2BnvwsA2L+NvvWPK/ETgfhxxTBw=
-  - secure: SKsvcnWR6lG+MsYLv/lHMPzzdtzCq6ZOshk2WKewKToT+TGoumXAjJgJyxyRfzcgN93tWRefAvQLGkpYIv4QavCKTPrpZ8g9pq/uLqnSLD22L5hZfNm+xYr+LSoCpNqv90IS1KI1u6BEHI0WwHqg6h9LIG+rovJxPnLpRydqCuY=
-  - secure: TUTaDN4/HidkLN7amEHQqoTbr8GbTRNoxpiy8+VYP97njZtp58vO29V7L0epv/64Ls+Te3LxlRUnAJzJrkt5UWzqZhdyPcq+7DlUiIQCLbdXuarWmlCpHN/QYiIJIosTLPFrOx2+xzauLdcfvPAch72eb28V2aKvI4mrJUl+Jw0=
+    - secure: M8qwcS6j+mfhLjBf0oxc/Tf0vCs8vqRXOfCjgSp85SIaI7WWipBZIzJq9fbFwZQ46c0DPTt+63PlcHVFuY5Cxtm5y4EpGKIth5ssxGTHtCQ1HFdOfiQZOj5nFUZ4ur+qBK75D65dsNMWcqSyFnoxF71macRB9zHmYi/pgtOv10w=
+    - secure: Qpkc1wwxVxHGtMv4YvPER1wnE8wrXaEcS9xcucLzBE7BbaBT1E2EyW1bK583/KpLM4eWMQm7CQDXUasyxrWl9Q2Q3f+FQqayBf7Gu58Jief1pIk/Byl7UVRmHNTffOh38mNxbA/0l8POZ6VL2BnvwsA2L+NvvWPK/ETgfhxxTBw=
+    - secure: SKsvcnWR6lG+MsYLv/lHMPzzdtzCq6ZOshk2WKewKToT+TGoumXAjJgJyxyRfzcgN93tWRefAvQLGkpYIv4QavCKTPrpZ8g9pq/uLqnSLD22L5hZfNm+xYr+LSoCpNqv90IS1KI1u6BEHI0WwHqg6h9LIG+rovJxPnLpRydqCuY=
+    - secure: TUTaDN4/HidkLN7amEHQqoTbr8GbTRNoxpiy8+VYP97njZtp58vO29V7L0epv/64Ls+Te3LxlRUnAJzJrkt5UWzqZhdyPcq+7DlUiIQCLbdXuarWmlCpHN/QYiIJIosTLPFrOx2+xzauLdcfvPAch72eb28V2aKvI4mrJUl+Jw0=

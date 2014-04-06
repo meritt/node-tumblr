@@ -108,7 +108,7 @@ Options list please refer to [Tumblr API v2 - Tagged Methods](http://www.tumblr.
 To do build run:
 
 ```bash
-cake build
+npm run build
 ```
 
 ## Credits

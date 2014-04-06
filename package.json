@@ -25,7 +25,8 @@
       , "nodeunit": "0.8.x"
     }
   , "scripts": {
-      "test": "nodeunit test"
+        "test": "nodeunit test"
+      , "build": "./node_modules/.bin/coffee -c -o lib/ src/"
     }
   , "license": "MIT"
 }
