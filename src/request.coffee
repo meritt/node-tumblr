@@ -5,7 +5,7 @@ module.exports =
   # Prepare URL for blog requests
   blogUrl: (action, self, options = {}) ->
     params = [
-      'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
+      'https://api.tumblr.com/v2/blog/'         # Tumblr API URL
       self.host + '/' + action                 # blog host and action
       '/' + options.type if options.type?      # optional type of post to return
       '?'
@@ -23,13 +23,13 @@ module.exports =
   # Prepare URL for user requests
   userUrl: (action, options = {}) ->
     query = qs.stringify options
-    params = "http://api.tumblr.com/v2/user/#{action}?#{query}"
+    params = "https://api.tumblr.com/v2/user/#{action}?#{query}"
     params
 
   # Prepare URL for tagged posts requests
   taggedUrl: (self, options = {}) ->
     options.api_key = self.oauth.consumer_key
-    "http://api.tumblr.com/v2/tagged?#{qs.stringify options}"
+    "https://api.tumblr.com/v2/tagged?#{qs.stringify options}"
 
   # Send GET and POST requests
   get: (url, fn) -> req url, 'GET', fn
