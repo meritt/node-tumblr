@@ -5,7 +5,7 @@ module.exports =
   # Prepare URL for blog requests
   blogUrl: (action, self, options = {}) ->
     params = [
-      'http://api.tumblr.com/v2/blog/'         # Tumblr API URL
+      'https://api.tumblr.com/v2/blog/'         # Tumblr API URL
       self.host + '/' + action                 # blog host and action
       '/' + options.type if options.type?      # optional type of post to return
       '?'
