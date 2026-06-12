@@ -1,0 +1,19 @@
+{
+  "file_types": {
+    "JSON": ["**/*.json"]
+  },
+  "languages": {
+    "JavaScript": {
+      "format_on_save": "on",
+      "language_servers": ["typescript-language-server", "oxlint", "oxfmt"],
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.oxc": true
+      }
+    }
+  }
+}

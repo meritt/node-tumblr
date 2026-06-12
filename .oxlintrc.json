@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "unicorn", "oxc", "import", "promise", "node"],
+  "env": {
+    "node": true,
+    "es2026": true
+  },
+  "globals": {
+    "Temporal": "readonly"
+  },
+  "ignorePatterns": ["node_modules/", "coverage/"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "rules": {
+    "curly": ["error", "all"],
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "max-depth": "error",
+    "no-await-in-loop": "off",
+    "no-constructor-return": "error",
+    "no-duplicate-imports": "error",
+    "no-else-return": "error",
+    "no-implicit-coercion": "error",
+    "no-lonely-if": "error",
+    "no-multi-assign": "error",
+    "no-param-reassign": "error",
+    "no-return-assign": "error",
+    "no-self-compare": "error",
+    "no-sequences": "error",
+    "no-template-curly-in-string": "error",
+    "no-throw-literal": "error",
+    "no-underscore-dangle": "off",
+    "no-unmodified-loop-condition": "error",
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+    ],
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "no-useless-concat": "error",
+    "no-useless-rename": "error",
+    "no-useless-return": "error",
+    "no-var": "error",
+    "object-shorthand": ["error", "always"],
+    "operator-assignment": ["error", "always"],
+    "prefer-const": "error",
+    "prefer-destructuring": [
+      "error",
+      { "object": true, "array": false },
+      { "enforceForRenamedProperties": false }
+    ],
+    "prefer-object-spread": "error",
+    "prefer-promise-reject-errors": "error",
+    "prefer-regex-literals": "error",
+    "prefer-rest-params": "error",
+    "prefer-template": "error",
+    "yoda": "error",
+    "unicorn/error-message": "error",
+    "unicorn/no-await-expression-member": "error",
+    "unicorn/no-nested-ternary": "error",
+    "unicorn/prefer-node-protocol": "error",
+    "unicorn/prefer-spread": "error",
+    "unicorn/prefer-top-level-await": "error",
+    "unicorn/throw-new-error": "error",
+    "import/no-commonjs": "error",
+    "import/no-cycle": "error",
+    "promise/always-return": "off",
+    "promise/no-nesting": "error",
+    "promise/prefer-await-to-callbacks": "error",
+    "promise/prefer-await-to-then": "error"
+  }
+}
