@@ -1,32 +1,43 @@
 {
-    "name": "tumblr"
-  , "version": "0.4.1"
-  , "description": "A wrapper for the Tumblr API"
-  , "keywords": ["tumblr", "blog", "api", "wrapper"]
-  , "author": "Alexey Simonenko <alexey@simonenko.su>"
-  , "contributors": [
-        "Alexey Simonenko <alexey@simonenko.su>"
-      , "Greg Wang <gregwym@qq.com>"
-    ]
-  , "homepage": "http://simonenko.su/projects/node-tumblr"
-  , "main": "./lib/index"
-  , "repository": {
-        "type": "git"
-      , "url": "https://github.com/meritt/node-tumblr.git"
-    }
-  , "engines": {
-      "node": ">=0.10"
-    }
-  , "dependencies": {
-      "request": "2.x"
-    }
-  , "devDependencies": {
-        "coffee-script": "~1.7.1"
-      , "nodeunit": "0.8.x"
-    }
-  , "scripts": {
-        "test": "nodeunit test"
-      , "build": "./node_modules/.bin/coffee -c -o lib/ src/"
-    }
-  , "license": "MIT"
+  "name": "tumblr",
+  "version": "0.4.1",
+  "description": "Wrapper for the Tumblr API",
+  "keywords": [
+    "api",
+    "blog",
+    "tumblr",
+    "tumblr-api",
+    "tumblr-oauth"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Alexey Simonenko",
+    "email": "alexey@simonenko.dev",
+    "url": "http://simonenko.xyz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meritt/node-tumblr.git"
+  },
+  "files": [
+    "lib"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": "./lib/index.js",
+  "scripts": {
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "test": "node --test test/*.js",
+    "coverage": "mkdir -p coverage && node --test --experimental-test-coverage --test-coverage-lines=97 --test-coverage-branches=92 --test-coverage-functions=97 --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info test/*.js"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.54.0",
+    "oxlint": "^1.69.0"
+  },
+  "engines": {
+    "node": ">=26.3"
+  },
+  "packageManager": "pnpm@11.6.0"
 }

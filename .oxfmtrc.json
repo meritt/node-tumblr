@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "sortImports": true,
+  "sortPackageJson": true,
+  "jsdoc": false,
+  "ignorePatterns": [".github/"]
+}

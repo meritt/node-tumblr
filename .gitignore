@@ -1,3 +1,10 @@
+._*
 .DS_Store
-node_modules
-keys.md
+*.local.*
+.worktrees/
+node_modules/
+coverage/
+*.log
+*.pem
+docs/
+plan/
