@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["26.x"]
+        include:
+          - node-version: "26.x"
+            coverage: true
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint --format=github
+      - run: pnpm format:check
+
+      - if: ${{ !matrix.coverage }}
+        run: pnpm test
+
+      - name: Coverage
+        if: matrix.coverage
+        run: pnpm coverage
+
+      - name: Upload coverage to Coveralls
+        if: matrix.coverage
+        uses: coverallsapp/github-action@v2
+        with:
+          file: coverage/lcov.info
+          format: lcov
+          fail-on-error: false
