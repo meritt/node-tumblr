@@ -1,122 +1,172 @@
 # tumblr
 
-[![NPM version](https://badge.fury.io/js/tumblr.svg)](http://badge.fury.io/js/tumblr) [![Build Status](https://travis-ci.org/meritt/node-tumblr.svg?branch=master)](https://travis-ci.org/meritt/node-tumblr) [![Dependency Status](https://david-dm.org/meritt/node-tumblr.svg?theme=shields.io)](https://david-dm.org/meritt/node-tumblr) [![devDependency Status](https://david-dm.org/meritt/node-tumblr/dev-status.svg?theme=shields.io)](https://david-dm.org/meritt/node-tumblr#info=devDependencies)
+[![NPM version][npm-image]][npm-url]
+[![Build status][github-actions-image]][github-actions-url]
+[![Coverage status][coveralls-image]][coveralls-url]
+[![Dependency status][libraries-image]][libraries-url]
 
-A node.js wrapper for the [Tumblr API v2](http://www.tumblr.com/docs/en/api/v2).
+A small, zero-dependency, read-only client for the [Tumblr API v2](https://www.tumblr.com/docs/en/api/v2). Methods return Tumblr's unwrapped `response`; failures throw `TumblrError`.
+
+## Requirements
+
+- Node.js ≥ 26.3
+- A Tumblr API key for public reads, or OAuth credentials for user-scoped endpoints
 
 ## Installation
 
 ```bash
-$ npm install tumblr
+pnpm add tumblr
+# or: npm install tumblr
 ```
 
-## Examples
+## Usage
 
 ```js
-var tumblr = require('tumblr');
+import { Tumblr } from 'tumblr';
 
-var oauth = {
-  consumer_key: 'OAuth Consumer Key',
-  consumer_secret: 'OAuth Consumer Secret',
-  token: 'OAuth Access Token',
-  token_secret: 'OAuth Access Token Secret'
-};
+const tumblr = new Tumblr({ consumer_key: process.env.TUMBLR_CONSUMER_KEY });
+const blog = tumblr.blog('staff.tumblr.com');
 
-var blog = new tumblr.Blog('blog.tumblr.com', oauth);
+const profile = await blog.info();
+// { blog: { name, title, posts, updated, description, ... } }
 
-blog.text({limit: 2}, function(error, response) {
-  if (error) {
-    throw new Error(error);
-  }
+const { posts } = await blog.posts({ limit: 5 });
+const photos = await blog.photo({ limit: 5 });
+const url = await blog.avatar(128);
+const tagged = await tumblr.tagged('art', { limit: 5 });
 
-  console.log(response.posts);
+for await (const post of blog.posts.each()) {
+  console.log(post.id_string, post.timestamp);
+}
+```
+
+User-scoped endpoints require OAuth:
+
+```js
+const tumblr = new Tumblr({
+  consumer_key,
+  consumer_secret,
+  token,
+  token_secret
 });
 
-var user = new tumblr.User(oauth);
+const { user } = await tumblr.user().info();
 
-user.info(function(error, response) {
-  if (error) {
-    throw new Error(error);
-  }
-
-  console.log(response.user);
-});
+for await (const post of tumblr.user().dashboard.each()) {
+  console.log(post.blog_name, post.id_string);
+}
 ```
 
-## Or with CoffeeScript
+## Authentication
 
-```coffeescript
-{Blog, User} = require 'tumblr'
+The strategy is selected from the credentials passed to the constructor:
 
-oauth =
-  consumer_key: 'OAuth Consumer Key'
-  consumer_secret: 'OAuth Consumer Secret'
-  token: 'OAuth Access Token'
-  token_secret: 'OAuth Access Token Secret'
+| Credentials                                                   | Strategy   | Transport                          |
+| ------------------------------------------------------------- | ---------- | ---------------------------------- |
+| `consumer_key`                                                | API key    | `api_key` query parameter          |
+| `access_token`                                                | OAuth 2.0  | `Authorization: Bearer`            |
+| `consumer_key` + `consumer_secret` + `token` + `token_secret` | OAuth 1.0a | `Authorization: OAuth` (HMAC-SHA1) |
 
-blog = new Blog 'blog.tumblr.com', oauth
+Incomplete OAuth 1.0a credentials throw `TypeError`. Each field falls back to an environment variable — `TUMBLR_CONSUMER_KEY`, `TUMBLR_CONSUMER_SECRET`, `TUMBLR_TOKEN`, `TUMBLR_TOKEN_SECRET`, `TUMBLR_ACCESS_TOKEN` — read from `process.env` or a custom `env` object.
 
-blog.text limit: 2, (error, response) ->
-  throw new Error error if error
-  console.log response.posts
-
-user = new User oauth
-
-user.info (error, response) ->
-  throw new Error error if error
-  console.log response.user
+```js
+new Tumblr({ consumer_key }); // explicit
+new Tumblr();                 // from process.env.TUMBLR_*
+new Tumblr({ env: secrets }); // from a custom source
 ```
 
-## API
+## Client
 
-#### Blog
-
-* `info(callback)`
-* `avatar([size, ]callback)`
-* `followers([options, ]callback)`
-* `likes([options, ]callback)`
-* `posts([options, ]callback)`
-* `text([options, ]callback)`
-* `quote([options, ]callback)`
-* `link([options, ]callback)`
-* `answer([options, ]callback)`
-* `video([options, ]callback)`
-* `audio([options, ]callback)`
-* `photo([options, ]callback)`
-
-Options list please refer to [Tumblr API v2 - Blog Methods](http://www.tumblr.com/docs/en/api/v2#blog_methods)
-
-#### User
-
-* `info(callback)`
-* `dashboard([options, ]callback)`
-* `likes([options, ]callback)`
-* `following([options, ]callback)`
-
-Options list please refer to [Tumblr API v2 - User Methods](http://www.tumblr.com/docs/en/api/v2#user-methods)
-
-#### Tagged
-
-* `search(tag[, options], callback)`
-
-Options list please refer to [Tumblr API v2 - Tagged Methods](http://www.tumblr.com/docs/en/api/v2#tagged-method)
-
-## Contributing
-
-**DO NOT directly modify the `lib` files.** These files are automatically built from CoffeeScript sources located under the `src` directory.
-
-To do build run:
-
-```bash
-npm run build
+```js
+new Tumblr(options);
 ```
 
-## Credits
+| Option        | Default                      | Meaning                                                                        |
+| ------------- | ---------------------------- | ------------------------------------------------------------------------------ |
+| _credentials_ | `env.TUMBLR_*`               | `consumer_key` / `consumer_secret` / `token` / `token_secret` / `access_token` |
+| `env`         | `process.env`                | Source for the `TUMBLR_*` fallbacks                                            |
+| `baseUrl`     | `https://api.tumblr.com/v2/` | API host                                                                       |
+| `timeout`     | `30000`                      | Per-request timeout in ms; `0` disables                                        |
 
-Big thanks to all [contributors](https://github.com/meritt/node-tumblr/graphs/contributors).
+`tumblr.rateLimit` returns the rate limit of the most recent request as `{ limit, remaining, reset }`, where `reset` is a `Temporal.Instant`, or `undefined` before the first request.
+
+`Tumblr` implements `Symbol.asyncDispose` for use with `await using`.
+
+## blog(host)
+
+| Method                                                             | Returns                            |
+| ------------------------------------------------------------------ | ---------------------------------- |
+| `info()`                                                           | `{ blog }`                         |
+| `avatar(size = 64)`                                                | avatar image URL                   |
+| `post(id)`                                                         | a single post, or `null`           |
+| `posts(options)`                                                   | `{ blog, posts, total_posts }`     |
+| `text` / `quote` / `link` / `answer` / `video` / `audio` / `photo` | posts of that type                 |
+| `notes(id, options)`                                               | `{ notes, total_notes, ... }`      |
+| `likes(options)`                                                   | `{ liked_posts, liked_count }`     |
+| `followers(options)`                                               | `{ users, total_users }` — OAuth  |
+| `following(options)`                                               | `{ blogs, total_blogs }` — OAuth  |
+
+`avatar` resolves to the image URL for `size` {16, 24, 30, 40, 48, 64, 96, 128, 512}.
+`notes(id, { mode })` accepts a `mode` of `all`, `likes`, `conversation`, `rollup`, or `reblogs_with_tags`.
+
+## user()
+
+| Method               | Returns           |
+| -------------------- | ----------------- |
+| `info()`             | `{ user }`        |
+| `limits()`           | API usage limits  |
+| `dashboard(options)` | `{ posts }`       |
+| `likes(options)`     | `{ liked_posts }` |
+| `following(options)` | `{ blogs }`       |
+
+All `user()` methods require OAuth.
+
+## tagged(tag, options)
+
+Returns an array of posts tagged with `tag`.
+
+## Pagination
+
+Each list method — `posts`, `notes`, `likes`, `followers`, `following`, `dashboard`, `tagged`, and the type shortcuts — exposes an `.each` companion returning an `AsyncIterable` that follows Tumblr's cursors to the last page:
+
+```js
+for await (const post of tumblr.tagged.each('art')) {
+  // ...
+}
+```
+
+## Options
+
+Method `options` carry through to the request as query parameters (`limit`, `offset`, `before`, `after`, `tag`, `npf`, `filter`, `reblog_info`, `notes_info`, …), plus two wrapper keys:
+
+| Key       | Meaning                                                    |
+| --------- | ---------------------------------------------------------- |
+| `signal`  | `AbortSignal` for cancellation                             |
+| `timeout` | Per-call timeout in ms, overriding the constructor default |
+
+## Errors
+
+A failed request — an HTTP or envelope error, a network failure, a timeout, or invalid JSON — throws `TumblrError` with `message`, `status`, `code`, `meta`, `errors`, and `rateLimit`.
+
+Invalid arguments — missing or incomplete credentials, an out-of-range `timeout`, an unsupported avatar size, a non-numeric post id, a missing tag, a missing host — throw `TypeError` or `RangeError`.
+
+## Rate limits
+
+HTTP 429 surfaces as `TumblrError`; no retry or back-off is performed. `tumblr.rateLimit` holds the latest limit, remaining count, and reset instant.
+
+## Author
+
+- [Alexey Simonenko](https://github.com/meritt)
 
 ## License
 
-The MIT License, see the included `license.md` file.
+MIT. See `LICENSE`.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/meritt/node-tumblr/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[npm-image]: https://img.shields.io/npm/v/tumblr.svg?style=flat
+[npm-url]: https://www.npmjs.com/package/tumblr
+[github-actions-image]: https://github.com/meritt/node-tumblr/actions/workflows/ci.yml/badge.svg
+[github-actions-url]: https://github.com/meritt/node-tumblr/actions/workflows/ci.yml
+[coveralls-image]: https://coveralls.io/repos/github/meritt/node-tumblr/badge.svg?branch=main
+[coveralls-url]: https://coveralls.io/github/meritt/node-tumblr?branch=main
+[libraries-image]: https://img.shields.io/librariesio/release/npm/tumblr.svg?style=flat
+[libraries-url]: https://libraries.io/npm/tumblr
