@@ -1,6 +1,6 @@
 {
   "name": "tumblr",
-  "version": "0.4.1",
+  "version": "1.0.0",
   "description": "Wrapper for the Tumblr API",
   "keywords": [
     "api",
