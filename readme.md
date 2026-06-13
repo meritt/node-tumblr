@@ -71,7 +71,7 @@ Incomplete OAuth 1.0a credentials throw `TypeError`. Each field falls back to an
 
 ```js
 new Tumblr({ consumer_key }); // explicit
-new Tumblr();                 // from process.env.TUMBLR_*
+new Tumblr(); // from process.env.TUMBLR_*
 new Tumblr({ env: secrets }); // from a custom source
 ```
 
@@ -94,17 +94,17 @@ new Tumblr(options);
 
 ## blog(host)
 
-| Method                                                             | Returns                            |
-| ------------------------------------------------------------------ | ---------------------------------- |
-| `info()`                                                           | `{ blog }`                         |
-| `avatar(size = 64)`                                                | avatar image URL                   |
-| `post(id)`                                                         | a single post, or `null`           |
-| `posts(options)`                                                   | `{ blog, posts, total_posts }`     |
-| `text` / `quote` / `link` / `answer` / `video` / `audio` / `photo` | posts of that type                 |
-| `notes(id, options)`                                               | `{ notes, total_notes, ... }`      |
-| `likes(options)`                                                   | `{ liked_posts, liked_count }`     |
-| `followers(options)`                                               | `{ users, total_users }` — OAuth  |
-| `following(options)`                                               | `{ blogs, total_blogs }` — OAuth  |
+| Method                                                             | Returns                          |
+| ------------------------------------------------------------------ | -------------------------------- |
+| `info()`                                                           | `{ blog }`                       |
+| `avatar(size = 64)`                                                | avatar image URL                 |
+| `post(id)`                                                         | a single post, or `null`         |
+| `posts(options)`                                                   | `{ blog, posts, total_posts }`   |
+| `text` / `quote` / `link` / `answer` / `video` / `audio` / `photo` | posts of that type               |
+| `notes(id, options)`                                               | `{ notes, total_notes, ... }`    |
+| `likes(options)`                                                   | `{ liked_posts, liked_count }`   |
+| `followers(options)`                                               | `{ users, total_users }` — OAuth |
+| `following(options)`                                               | `{ blogs, total_blogs }` — OAuth |
 
 `avatar` resolves to the image URL for `size` {16, 24, 30, 40, 48, 64, 96, 128, 512}.
 `notes(id, { mode })` accepts a `mode` of `all`, `likes`, `conversation`, `rollup`, or `reblogs_with_tags`.
