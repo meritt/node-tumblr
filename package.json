@@ -33,7 +33,7 @@
     "coverage": "mkdir -p coverage && node --test --experimental-test-coverage --test-coverage-lines=97 --test-coverage-branches=92 --test-coverage-functions=97 --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info test/*.js"
   },
   "devDependencies": {
-    "oxfmt": "^0.54.0",
+    "oxfmt": "^0.57.0",
     "oxlint": "^1.69.0"
   },
   "engines": {
